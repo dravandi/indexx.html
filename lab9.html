@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <h1>How many buttons do you want? Range is from 5 to 100.</h1>
+    <input type="text" id="textId">
+    <input type="button" id="buttonId" value="Go!">
+
+
+
+    <script>
+
+        let width = window.innerWidth - 300;
+        let height = window.innerHeight - 300;
+
+        let dog = []
+
+        function Brick() {
+            this.btn = document.createElement("BUTTON");
+            document.body.appendChild(this.btn);
+            this.btn.innerHTML = "Button";
+            this.btn.style.width = 10 + "em";
+            this.btn.style.height = 5 + "em";
+            this.btn.style.backgroundColor = randomColour();
+
+
+        }
+
+        function multiple() {
+            let loopThrough = parseInt(document.getElementById("textId").value);
+            for (let i = 0; i < loopThrough; i++) {
+                dog.push(new Brick);
+            }
+        }
+
+        function randomColour() {
+            let a = Math.floor((Math.random() * 255));
+            let b = Math.floor((Math.random() * 255));
+            let c = Math.floor((Math.random() * 255));
+            return "rgb(" + a + ", " + b + ", " + c + ")";
+        }
+
+        function validate() {
+            let marlon = parseInt(document.getElementById("textId").value);
+            if (marlon < 5 || marlon > 100) {
+                document.write("Not in range. Refresh page and try again.")
+
+            }
+            else {
+                multiple();
+
+            }
+        }
+
+
+        function buttonTransport() {
+            let range = 150;
+            let width = window.innerWidth - range;
+            let height = window.innerHeight - range;
+            for (let i = 0; i < dog.length; i++) {
+                dog[i].btn.style.top = Math.floor((Math.random() * height) + "px");
+                dog[i].btn.style.left = Math.floor((Math.random() * width) + "px");
+                dog[i].btn.style.position = "absolute";
+            }
+        }
+
+        setInterval(function () { buttonTransport(); }, 1000);
+
+
+        document.getElementById("buttonId").onclick = validate;
+
+    </script>
+
+
+
+</body>
+
+</html>
